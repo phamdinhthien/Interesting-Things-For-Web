@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.2/theme/icecoder.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/Styles.css">
+  <title>Digram UML</title>
+</head>
+
+<body>
+  <!-- diagram -->
+  <div id="diagramURL">
+    <div id="myDiagramDiv" style="border: solid 1px black; width:100%; height:340px"></div>
+  </div>
+  <!-- end diagram -->
+
+  <!-- container -->
+  <div class="container-fluid position-relative pt-3">
+    <!-- buttons -->
+    <div class="row mb-2">
+      <button id="noteBtn" class="btn btn-outline-warning ml-3">Note</button>
+    </div>
+    <div class="row mb-4 position-relative">
+      <div id="btn-container" class="d-flex ml-3">
+        <button id="chooseBtn" class="btn btn-primary mr-1">Lựa chọn</button>
+        <button id="screenCodeBtn" class="btn btn-primary">Code</button>
+      </div>
+      <div id="formLoadDiagram" class="d-flex position-absolute" style="right: 1em">
+        <input type=" text" id="problem_id" class="form-control" placeholder="nhập problem id">
+        <button id="loadDiagram" class="btn btn-success">Load</button>
+      </div>
+    </div>
+    <!-- end buttons -->
+    <!-- explain -->
+    <div class="row" id="explain-container">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div id="explain">
+          <div class="modal-header p-2">
+            <h4>Note</h4>
+            <span id="close-explain-container">&times;</span>
+          </div>
+          <div class="modal-body">
+            <p>
+              Symbol prefixes indicate the visibility of methods and properties. The four
+              possibilities
+              are:
+            </p>
+            <ul>
+              <li>+ (Public)</li>
+              <li>- (Private)</li>
+              <li># (Protected)</li>
+              <li>' ' (Default)</li>
+            </ul>
+            Additionally, the ~ symbol is used to indicate an item is a package.
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end explain -->
+
+    <!-- define code content -->
+    <div class="row" id="define-code-content">
+      <!-- class -->
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <div id="obj-opition">
+          <div id="obj-header"><b>My Class</b></div>
+          <div id="obj-body">
+            <div id="obj-properties">
+              <span class="obj-item">String: str</span>
+              <span class="obj-item">List: list</span>
+              <span class="obj-item">Student: n</span>
+            </div>
+
+            <div id="obj-method">
+              <span class="obj-item">tên nè</span>
+              <span class="obj-item">dạng nè</span>
+              <span class="obj-item">gì gì nữa nè</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end class -->
+
+      <!-- select -->
+      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 ">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
+            <div id="select">
+              <div id="select-header"><b>Lựa chọn</b></div>
+
+              <label class="obj-item" for="r-modifier">
+                <input type="checkbox" id="r-modifier" />
+                <span>Yêu cầu access modifier</span>
+              </label>
+
+              <label class="obj-item" for="r-type">
+                <input type="checkbox" id="r-type" />
+                <span>Yêu cầu type</span>
+              </label>
+
+              <label class="obj-item" for="r-static">
+                <input type="checkbox" id="r-static" />
+                <span>Yêu cầu static modifier</span>
+              </label>
+
+              <label class="obj-item" for="r-final">
+                <input type="checkbox" id="r-final" />
+                <span>Yêu cầu final modifier</span>
+              </label>
+
+              <label class="obj-item" for="r-abstract">
+                <input type="checkbox" id="r-abstract" />
+                <span>Yêu cầu abstract modifier</span>
+              </label>
+
+              <label class="obj-item" for="r-parameters">
+                <input type="checkbox" id="r-parameters" />
+                <span>Yêu cầu parameters</span>
+              </label>
+
+            </div>
+          </div>
+          <!-- end select -->
+
+          <!-- select-object -->
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
+            <div id="select-object">
+              <div class="header-select"><b>Lựa chọn cho Object</b></div>
+
+              <label class="obj-item" for="r-interface-class">
+                <input type="checkbox" id="r-interface-class" />
+                <span>Yêu cầu interface</span>
+              </label>
+
+              <label class="obj-item" for="r-abstract-class">
+                <input type="checkbox" id="r-abstract-class" />
+                <span>Yêu cầu abstract</span>
+              </label>
+
+              <label class="obj-item" for="r-final-class">
+                <input type="checkbox" id="r-final-class" />
+                <span>Yêu cầu final</span>
+              </label>
+
+              <label class="obj-item" for="r-static-class">
+                <input type="checkbox" id="r-static-class" />
+                <span>Yêu cầu static</span>
+              </label>
+            </div>
+          </div>
+          <!-- end select-object -->
+        </div>
+      </div>
+    </div>
+    <!-- end define code content -->
+
+    <!-- java-code -->
+    <div id="java-code-container" class="row">
+      <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+        <h6>Sample</h6>
+        <hr />
+        <div id="java-code-1"></div>
+      </div> -->
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h6>Test</h6>
+        <hr />
+        <textarea id="java-code-2"></textarea>
+      </div>
+    </div>
+    <!-- end java-code -->
+  </div>
+  <!-- end container -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/1.8.36/go-debug.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.32.0/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.2/mode/clike/clike.min.js"></script>
+  <script src="../js/data.js"></script>
+</body>
+
+</html>

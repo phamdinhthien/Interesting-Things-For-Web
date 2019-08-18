@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="form">
+        <table>
+            <tr>
+                <td>file</td>
+                <td><input type="file" name="" id="file" enctype="multipart/form-data"></td>
+            </tr>
+            <tr>
+                <td>problem id</td>
+                <td><input type="text" name="" id="problem_id" required>
+            </tr>
+            <tr>
+                <td>trọng số abstract</td>
+                <td><input type="text" name="" id="abstractsWeight" required value="1"></td>
+            </tr>
+            <tr>
+                <td>trọng số extend</td>
+                <td><input type="text" name="" id="extendWeight" required value="3"></td>
+            </tr>
+            <tr>
+                <td>trọng số property</td>
+                <td><input type="text" name="" id="fieldWeight" required value="2"></td>
+            </tr>
+            <tr>
+                <td>trọng số final</td>
+                <td><input type="text" name="" id="finalWeight" required value="1"></td>
+            </tr>
+            <tr>
+                <td>trọng số interface</td>
+                <td><input type="text" name="" id="interfaceWeight" required value="1"></td>
+            </tr>
+            <tr>
+                <td>trọng số method</td>
+                <td><input type="text" name="" id="methodWeight" required value="2"></td>
+            </tr>
+            <tr>
+                <td>trọng số static</td>
+                <td><input type="text" name="" id="staticWeight" required value="1"> </td>
+            </tr>
+            <tr>
+                <td>trọng số type</td>
+                <td><input type="text" name="" id="typeWeight" required value="1"></td>
+            </tr>
+            <tr>
+                <td>trọng số public/protected/private/default</td>
+                <td><input type="text" name="" id="visibilityWeight" value="1"></td>
+            </tr>
+            <tr>
+                <td> <input type="submit" value="submit" id="submit"></td>
+            </tr>
+        </table>
+
+    </form>
+
+    <script>
+        var file = document.getElementById("file");
+        var btn = document.getElementById("submit");
+
+        const formData = new FormData();
+
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            var abstractsWeight = document.getElementById('abstractsWeight').value;
+            var extendWeight = document.getElementById('extendWeight').value;
+            var fieldWeight = document.getElementById('fieldWeight').value;
+            var fileData = file.files[0];
+            var finalWeight = document.getElementById('finalWeight').value;
+            var interfaceWeight = document.getElementById('interfaceWeight').value;
+            var methodWeight = document.getElementById('methodWeight').value;
+            var problemId = document.getElementById('problem_id').value;
+            var staticWeight = document.getElementById('staticWeight').value;
+            var typeWeight = document.getElementById('typeWeight').value;
+            var visibilityWeight = document.getElementById('visibilityWeight').value;
+            var url = 'http://192.168.49.108:5559/parsers/problems/' + problemId;
+
+            formData.append(
+                'abstractsWeight',
+                abstractsWeight
+            );
+            formData.append(
+                'extendWeight',
+                extendWeight
+            )
+            formData.append(
+                'fieldWeight',
+                fieldWeight
+            )
+            formData.append(
+                'file',
+                fileData
+            );
+            formData.append(
+                'finalWeight',
+                finalWeight
+            )
+            formData.append(
+                'interfaceWeight',
+                interfaceWeight
+            )
+            formData.append(
+                'methodWeight',
+                methodWeight
+            );
+            formData.append(
+                'problem_id',
+                problemId
+            )
+            formData.append(
+                'staticWeight',
+                staticWeight
+            )
+            formData.append(
+                'typeWeight',
+                typeWeight
+            )
+            formData.append(
+                'visibilityWeight',
+                visibilityWeight
+            )
+            new Promise((res, rej) => {
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ7XCJpZFwiOjMsXCJyb2xlc1wiOltcIkFETUlOXCJdfSIsImlhdCI6MTU2NTg1NzQwOCwiZXhwIjoxNTY2NDYyMjA4fQ.Dy0z0ojMNxlk38rxGu8gS4KDviM2B8NCsOxuYhewEGbN5qo-sxugp7Ay6nVW5LHcwOduX7HR3k83fKxCPDAiVQ'
+                    },
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => console.log(data))
+                    .catch(err => console.log(err))
+            })
+        })
+
+    </script>
+</body>
+
+</html>
