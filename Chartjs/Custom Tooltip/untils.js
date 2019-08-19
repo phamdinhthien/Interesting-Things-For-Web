@@ -47,7 +47,7 @@ var customTooltips = function (tooltip) {
 
         bodyLines.forEach(function (body, i) {
             var style = 'background:' + bgrColor[i];
-            style += '; border-color:' + bgrColor[i];
+            // style += '; border-color:' + bgrColor[i];
             style += '; border-width: 2px';
             var span = '<span class="chartjs-tooltip-key" style="' + style + '"></span>';
             innerHtml += '<tr><td>' + span + body + '</td></tr>';
@@ -70,53 +70,77 @@ var customTooltips = function (tooltip) {
     tooltipEl.style.fontStyle = tooltip._bodyFontStyle;
     tooltipEl.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
 };
+
 var moment = moment();
-var date = [moment.format('L'), moment.add(1, 'days').format('L'), moment.add(2, 'days').format('L'), moment.add(3, 'days').format('L'), moment.add(4, 'days').format('L'), moment.add(5, 'days').format('L'), moment.add(6, 'days').format('L')]
+var date = [moment.format('DD/MM/YYYY'), moment.add(1, 'days').format('DD/MM/YYYY'), moment.add(2, 'days').format('DD/MM/YYYY'), moment.add(3, 'days').format('DD/MM/YYYY'), moment.add(4, 'days').format('DD/MM/YYYY'), moment.add(5, 'days').format('DD/MM/YYYY'), moment.add(6, 'days').format('DD/MM/YYYY')]
 var lineChartData = {
     labels: date,
     datasets: [{
         label: 'My First dataset',
         fill: false,
         borderColor: "aqua",
-        data: [1, 2, 3, 4, 5, 6, 7]
+        backgroundColor: "aqua",
+        data: [2, 5, 3, 1, 5, 6, 3]
     }, {
         label: 'My Second dataset',
         fill: false,
         borderColor: "green",
-        data: [1, 5, 3, 4, 1, 6, 2]
+        backgroundColor: "green",
+        data: [1, 5, 3, 4, 1, 6, 2],
+        // pointBackgroundColor: "red",
+        // pointBorderColor: "red",
+        // pointBorderWidth: 1
     }]
 };
+
+var options = {
+    title: {
+        display: true,
+        text: 'Chart.js Line Chart - Custom Tooltips',
+        fontSize: 20
+    },
+    scales: {
+        xAxes: [{
+            ticks: {
+                autoSkip: false,
+                maxRotation: 60,
+                minRotation: 60,
+                // fontColor: 'red'
+            },
+            scaleLabel: {
+                display: true,
+                labelString: 'Time',
+                // fontColor: 'red',
+                fontSize: 14
+            }
+        }],
+        yAxes: [{
+            ticks: {
+                beginAtZero: true,
+            },
+            scaleLabel: {
+                display: true,
+                labelString: 'Count',
+                fontSize: 14
+            }
+        }]
+    },
+    tooltips: {
+        enabled: false,
+        mode: 'index',
+        // intersect: false,
+        position: 'nearest',
+        custom: customTooltips
+    }
+}
 
 window.onload = function () {
     var chartEl = document.getElementById('chart').getContext('2d');
     chartEl.canvas.width = "100%";
-    chartEl.canvas.height = 300;
-    chartEl.translate(100, 300);
-    chartEl.rotate(-0.5 * Math.PI);
+    chartEl.canvas.height = 350;
     window.myLine = new Chart(chartEl, {
         type: 'line',
         data: lineChartData,
-        options: {
-            title: {
-                display: true,
-                text: 'Chart.js Line Chart - Custom Tooltips'
-            },
-            scales: {
-                xAxes: [{
-                    ticks: {
-                        autoSkip: false,
-                        maxRotation: 60,
-                        minRotation: 60
-                    }
-                }]
-            },
-            tooltips: {
-                enabled: false,
-                mode: 'index',
-                // intersect: false,
-                position: 'nearest',
-                custom: customTooltips
-            }
-        }
+        options: options
     });
 };

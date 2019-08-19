@@ -26,14 +26,16 @@
       <button id="noteBtn" class="btn btn-outline-warning ml-3">Note</button>
     </div>
     <div class="row mb-4 position-relative">
-      <div id="btn-container" class="d-flex ml-3">
+      <!-- <div id="btn-container" class="d-flex ml-3">
         <button id="chooseBtn" class="btn btn-primary mr-1">Lựa chọn</button>
         <button id="screenCodeBtn" class="btn btn-primary">Code</button>
-      </div>
-      <div id="formLoadDiagram" class="d-flex position-absolute" style="right: 1em">
-        <input type=" text" id="problem_id" class="form-control" placeholder="nhập problem id">
-        <button id="loadDiagram" class="btn btn-success">Load</button>
-      </div>
+      </div> -->
+      <form id="formLoadDiagram" class="d-flex ml-3">
+        <input type="text" id="problem_id" class="form-control" placeholder="nhập problem id" required>
+        <div id="btnLoadDiagram">
+          <button id="loadDiagram" class="btn btn-success">Load</button>
+        </div>
+      </form>
     </div>
     <!-- end buttons -->
     <!-- explain -->
@@ -71,15 +73,15 @@
           <div id="obj-header"><b>My Class</b></div>
           <div id="obj-body">
             <div id="obj-properties">
-              <span class="obj-item">String: str</span>
-              <span class="obj-item">List: list</span>
-              <span class="obj-item">Student: n</span>
+              <span class="obj-item">String: thuộc tính 1</span>
+              <span class="obj-item">List: thuộc tính 2</span>
+              <span class="obj-item">Student: thuộc tính 3</span>
             </div>
 
             <div id="obj-method">
-              <span class="obj-item">tên nè</span>
-              <span class="obj-item">dạng nè</span>
-              <span class="obj-item">gì gì nữa nè</span>
+              <span class="obj-item">phương thức 1</span>
+              <span class="obj-item">phương thức 2</span>
+              <span class="obj-item">phương thức 3</span>
             </div>
           </div>
         </div>
@@ -100,7 +102,7 @@
 
               <label class="obj-item" for="r-type">
                 <input type="checkbox" id="r-type" />
-                <span>Yêu cầu type</span>
+                <span>6 cầu type</span>
               </label>
 
               <label class="obj-item" for="r-static">
@@ -160,13 +162,13 @@
     <!-- end define code content -->
 
     <!-- java-code -->
-    <div id="java-code-container" class="row">
-      <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+    <div id="java-code-container" class="row mt-5 mb-3">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
         <h6>Sample</h6>
         <hr />
         <div id="java-code-1"></div>
-      </div> -->
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
         <h6>Test</h6>
         <hr />
         <textarea id="java-code-2"></textarea>

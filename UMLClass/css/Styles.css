@@ -111,7 +111,7 @@
   
   #java-code-container {
     font-size: 14px;
-    display: none;
+    display: flex;
   }
 
   h6 {
